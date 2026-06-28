@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Paalkovva.store v6.0</title>
+<title>Byprithu.store v6.0</title>
 <style>
 :root{
   --bg:#ffffff;--surface:#f5f5f5;--card:#ffffff;--border:#e8e8e8;
@@ -244,9 +244,9 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <div class="topbar">
   <div class="brand-row">
     <div class="brand-left">
-      <div class="brand-logo">P</div>
+      <div class="brand-logo">B</div>
       <div>
-        <div class="brand-name">Paalkovva<span class="brand-dot">.store</span></div>
+        <div class="brand-name">Byprithu<span class="brand-dot">.store</span></div>
         <div class="brand-sub" id="loggedInAs">Not logged in</div>
       </div>
     </div>
@@ -354,8 +354,8 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="card">
       <div class="card-title">📱 Back Tap Setup</div>
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Copy URL above</div><div class="step-desc">Tap "Copy App URL".</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create Shortcut</div><div class="step-desc">Shortcuts → ＋ → Add Action → "Open URLs" → paste → name it <b>Paalkovva</b>.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Back Tap</div><div class="step-desc">Settings → Accessibility → Touch → Back Tap → Double Tap → <b>Paalkovva</b></div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create Shortcut</div><div class="step-desc">Shortcuts → ＋ → Add Action → "Open URLs" → paste → name it <b>Byprithu</b>.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Back Tap</div><div class="step-desc">Settings → Accessibility → Touch → Back Tap → Double Tap → <b>Byprithu</b></div></div></div>
     </div>
   </div>
 
@@ -397,7 +397,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="form-group"><label>Order ID</label><input type="text" id="oId" placeholder="Auto-generated"/></div>
     <div class="form-group"><label>Customer Name</label><input type="text" id="oName" placeholder="Full name"/></div>
     <div class="form-group"><label>Phone Number</label><input type="tel" id="oPhone" placeholder="10-digit number" inputmode="tel"/></div>
-    <div class="form-group"><label>Product / Item</label><input type="text" id="oProduct" placeholder="e.g. Paalkovva Special Pack x2"/></div>
+    <div class="form-group"><label>Product / Item</label><input type="text" id="oProduct" placeholder="e.g. Byprithu Special Pack x2"/></div>
     <div class="form-group"><label>Delivery Address</label><input type="text" id="oAddress" placeholder="City, State or full address"/></div>
     <div class="form-group"><label>Total Order Amount (₹)</label><div class="amount-wrap"><span class="amount-prefix">₹</span><input type="number" id="oTotal" placeholder="0" inputmode="decimal" oninput="onTotalChange()"/></div></div>
 
@@ -532,10 +532,10 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 // ══════════════════════════════════════════
 // CONFIG — JSONBin (data never expires)
 // ══════════════════════════════════════════
-const BIN_ID   = '6a34f9b5da38895dfedc321a';
-const API_KEY  = '$2a$10$nVQLCvRftpWMCRTEZi1XTeAWEIYPI.GpLQ7Y/3XMZXRIhmnEjYFK6';
+const BIN_ID   = '6a416074f5f4af5e293e0965';
+const API_KEY  = '$2a$10$WRYUSSlq/aqTx/Hyi.l3G.CX0B/Iy8/rIcsBdhcTy7laYPauIEvD.';
 const BIN_URL  = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-const BACKUP_KEY = 'pv_backup_v2';
+const BACKUP_KEY = 'bp_backup_v2';
 
 // ══════════════════════════════════════════
 // STATUS CONFIG
@@ -582,10 +582,10 @@ const DEF_CATS = [
 let pools = DEF_POOLS, categories = DEF_CATS;
 let transactions = [], orders = [];
 let txType = 'expense', activeFilter = 'All', orderFilter = 'All';
-let currentUser = localStorage.getItem('pv_user') || '';
+let currentUser = localStorage.getItem('bp_user') || '';
 // Migrate old values
-if(currentUser === 'Owner') { currentUser = 'Husband'; localStorage.setItem('pv_user','Husband'); }
-if(currentUser === 'Girlfriend') { currentUser = 'Wife'; localStorage.setItem('pv_user','Wife'); }
+if(currentUser === 'Owner') { currentUser = 'Husband'; localStorage.setItem('bp_user','Husband'); }
+if(currentUser === 'Girlfriend') { currentUser = 'Wife'; localStorage.setItem('bp_user','Wife'); }
 let isSaving = false, currentSection = 'add';
 let selectedStatus = 'ordered', selectedPayType = 'cod';
 let editingOrderId = null, statusUpdateOrderId = null;
@@ -725,7 +725,7 @@ window.addEventListener('beforeunload', backupLocally);
 // ══════════════════════════════════════════
 function setUser(name) {
   currentUser = name;
-  localStorage.setItem('pv_user', name);
+  localStorage.setItem('bp_user', name);
   document.getElementById('loggedInAs').textContent = name==='Husband' ? 'Husband' : '♾️ Wife';
   document.getElementById('userPillName').textContent = name==='Husband' ? 'Husband' : '♾️ Wife';
   closeModal('userModal');
