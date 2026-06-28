@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Byprithu.store v5.8</title>
+<title>Paalkovva.store v6.0</title>
 <style>
 :root{
   --bg:#ffffff;--surface:#f5f5f5;--card:#ffffff;--border:#e8e8e8;
@@ -222,6 +222,21 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .copy-btn.copied{background:#f0fdf4;border-color:#bbf7d0;color:#15803d;}
 .copy-section{margin-bottom:10px;}
 .copy-section-title{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;font-weight:600;}
+
+.daily-card{background:#fff;border-radius:12px;border:1px solid #e8e8e8;padding:14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.daily-left{flex:1;}
+.daily-date{font-size:12px;color:#888;font-weight:600;margin-bottom:4px;}
+.daily-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
+.daily-stat{font-size:12px;}
+.daily-stat span{font-weight:700;}
+.daily-note{font-size:11px;color:#aaa;margin-top:4px;}
+.daily-closing{text-align:right;}
+.daily-closing-val{font-size:18px;font-weight:800;color:#000;}
+.daily-closing-label{font-size:10px;color:#aaa;margin-top:2px;}
+.src-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;}
+.src-web{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+.src-insta{background:#fdf2f8;color:#9d174d;border:1px solid #f9a8d4;}
+.del-tx-btn{background:#fee2e2;border:none;border-radius:8px;padding:6px 10px;color:#dc2626;font-size:12px;cursor:pointer;font-family:inherit;flex-shrink:0;margin-left:8px;}
 </style>
 </head>
 <body>
@@ -229,9 +244,9 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <div class="topbar">
   <div class="brand-row">
     <div class="brand-left">
-      <div class="brand-logo">B</div>
+      <div class="brand-logo">P</div>
       <div>
-        <div class="brand-name">Byprithu<span class="brand-dot">.store</span></div>
+        <div class="brand-name">Paalkovva<span class="brand-dot">.store</span></div>
         <div class="brand-sub" id="loggedInAs">Not logged in</div>
       </div>
     </div>
@@ -339,19 +354,19 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="card">
       <div class="card-title">📱 Back Tap Setup</div>
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Copy URL above</div><div class="step-desc">Tap "Copy App URL".</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create Shortcut</div><div class="step-desc">Shortcuts → ＋ → Add Action → "Open URLs" → paste → name it <b>Byprithu</b>.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Back Tap</div><div class="step-desc">Settings → Accessibility → Touch → Back Tap → Double Tap → <b>Byprithu</b></div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create Shortcut</div><div class="step-desc">Shortcuts → ＋ → Add Action → "Open URLs" → paste → name it <b>Paalkovva</b>.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Back Tap</div><div class="step-desc">Settings → Accessibility → Touch → Back Tap → Double Tap → <b>Paalkovva</b></div></div></div>
     </div>
   </div>
 
 </div>
 
 <div class="bottomnav">
-  <button class="nav-btn" id="nav-home" onclick="goTo('home')"><span class="nav-icon">📊</span>Dashboard</button>
+  <button class="nav-btn" id="nav-home" onclick="goTo('home')"><span class="nav-icon">📊</span>Dash</button>
   <button class="nav-btn" id="nav-orders" onclick="goTo('orders')"><span class="nav-icon">📦</span>Orders</button>
   <button class="nav-btn active" id="nav-add" onclick="goTo('add')"><span class="nav-icon">➕</span>Add</button>
   <button class="nav-btn" id="nav-history" onclick="goTo('history')"><span class="nav-icon">📋</span>History</button>
-  <button class="nav-btn" id="nav-setup" onclick="goTo('setup')"><span class="nav-icon">⚙️</span>Setup</button>
+  <button class="nav-btn" id="nav-daily" onclick="goTo('daily')"><span class="nav-icon">📅</span>Daily</button>
 </div>
 
 <!-- NEW ORDER MODAL -->
@@ -382,7 +397,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="form-group"><label>Order ID</label><input type="text" id="oId" placeholder="Auto-generated"/></div>
     <div class="form-group"><label>Customer Name</label><input type="text" id="oName" placeholder="Full name"/></div>
     <div class="form-group"><label>Phone Number</label><input type="tel" id="oPhone" placeholder="10-digit number" inputmode="tel"/></div>
-    <div class="form-group"><label>Product / Item</label><input type="text" id="oProduct" placeholder="e.g. Byprithu Special Pack x2"/></div>
+    <div class="form-group"><label>Product / Item</label><input type="text" id="oProduct" placeholder="e.g. Paalkovva Special Pack x2"/></div>
     <div class="form-group"><label>Delivery Address</label><input type="text" id="oAddress" placeholder="City, State or full address"/></div>
     <div class="form-group"><label>Total Order Amount (₹)</label><div class="amount-wrap"><span class="amount-prefix">₹</span><input type="number" id="oTotal" placeholder="0" inputmode="decimal" oninput="onTotalChange()"/></div></div>
 
@@ -406,6 +421,13 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       </div>
     </div>
 
+    <div class="form-group">
+      <label>Order Source</label>
+      <div style="display:flex;gap:8px">
+        <button class="pay-btn cod active" id="srcBtnWeb" onclick="setOrderSource('website')">🌐 Website</button>
+        <button class="pay-btn prepaid" id="srcBtnInsta" onclick="setOrderSource('instagram')">📸 Instagram</button>
+      </div>
+    </div>
     <div class="form-group"><label>Note (optional)</label><input type="text" id="oNote" placeholder="Any extra details"/></div>
     <button class="btn-primary" onclick="saveOrder()">Save Order ✓</button>
     <button class="btn-secondary" onclick="closeModal('newOrderModal')">Cancel</button>
@@ -432,6 +454,22 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   </div>
 </div>
 
+<!-- DAILY RECORDS SECTION -->
+<div class="section" id="sec-daily">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div style="font-size:16px;font-weight:700">Daily Records</div>
+    <button class="btn-primary" style="width:auto;padding:10px 16px;font-size:13px;margin:0" onclick="openDailyModal()">＋ Add Record</button>
+  </div>
+  <div class="card" id="dailySummaryCard">
+    <div class="card-title">This Month Summary</div>
+    <div id="dailySummary"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Daily Log</div>
+    <div id="dailyList"></div>
+  </div>
+</div>
+
 <!-- SAVINGS MODAL -->
 <div class="modal-overlay" id="savingsModal">
   <div class="modal">
@@ -441,6 +479,40 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="form-group"><label>Amount (₹)</label><div class="amount-wrap"><span class="amount-prefix">₹</span><input type="number" id="saveAmt" placeholder="0" inputmode="decimal"/></div></div>
     <div class="form-group"><label>Note</label><input type="text" id="saveNote" placeholder="e.g. Weekly profit transfer"/></div>
     <button class="btn-primary" onclick="moveToSavings()">Move to Savings ✓</button>
+  </div>
+</div>
+
+<!-- DAILY RECORD MODAL -->
+<div class="modal-overlay" id="dailyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('dailyModal')">✕</button>
+    <div class="modal-title">Add Daily Record</div>
+    <div class="modal-sub">Track your daily cash flow</div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" id="dailyDate"/>
+    </div>
+    <div class="form-group">
+      <label>Opening Balance (₹) — Cash in hand at start of day</label>
+      <div class="amount-wrap"><span class="amount-prefix">₹</span><input type="number" id="dailyOpening" placeholder="0" inputmode="decimal"/></div>
+    </div>
+    <div class="form-group">
+      <label>Total Spent Today (₹)</label>
+      <div class="amount-wrap"><span class="amount-prefix">₹</span><input type="number" id="dailySpent" placeholder="0" inputmode="decimal"/></div>
+    </div>
+    <div class="form-group">
+      <label>Total Received Today (₹)</label>
+      <div class="amount-wrap"><span class="amount-prefix">₹</span><input type="number" id="dailyReceived" placeholder="0" inputmode="decimal"/></div>
+    </div>
+    <div class="form-group">
+      <label>Note (optional)</label>
+      <input type="text" id="dailyNote" placeholder="e.g. Market day, big sale etc."/>
+    </div>
+    <div style="background:#f8f8f8;border-radius:12px;padding:14px;margin-bottom:14px">
+      <div style="font-size:12px;color:#888;margin-bottom:6px">Closing Balance (auto calculated)</div>
+      <div style="font-size:22px;font-weight:700;color:#000" id="closingPreview">₹0</div>
+    </div>
+    <button class="btn-primary" onclick="saveDailyRecord()">Save Record ✓</button>
   </div>
 </div>
 
@@ -460,10 +532,10 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 // ══════════════════════════════════════════
 // CONFIG — JSONBin (data never expires)
 // ══════════════════════════════════════════
-const BIN_ID   = '6a416074f5f4af5e293e0965';
-const API_KEY  = '$2a$10$WRYUSSlq/aqTx/Hyi.l3G.CX0B/Iy8/rIcsBdhcTy7laYPauIEvD.';
+const BIN_ID   = '6a34f9b5da38895dfedc321a';
+const API_KEY  = '$2a$10$nVQLCvRftpWMCRTEZi1XTeAWEIYPI.GpLQ7Y/3XMZXRIhmnEjYFK6';
 const BIN_URL  = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-const BACKUP_KEY = 'bp_backup_v1';
+const BACKUP_KEY = 'pv_backup_v2';
 
 // ══════════════════════════════════════════
 // STATUS CONFIG
@@ -510,7 +582,7 @@ const DEF_CATS = [
 let pools = DEF_POOLS, categories = DEF_CATS;
 let transactions = [], orders = [];
 let txType = 'expense', activeFilter = 'All', orderFilter = 'All';
-let currentUser = localStorage.getItem('bp_user') || '';
+let currentUser = localStorage.getItem('pv_user') || '';
 // Migrate old values
 if(currentUser === 'Owner') { currentUser = 'Husband'; localStorage.setItem('pv_user','Husband'); }
 if(currentUser === 'Girlfriend') { currentUser = 'Wife'; localStorage.setItem('pv_user','Wife'); }
@@ -568,7 +640,7 @@ async function saveToCloud(retries = 3) {
   isSaving = true;
   setSyncStatus('syncing','Saving...');
   backupLocally();
-  const payload = { transactions, orders, pools, categories, lastSaved: new Date().toISOString() };
+  const payload = { transactions, orders, pools, categories, dailyRecords, lastSaved: new Date().toISOString() };
 
   return new Promise((resolve) => {
     let attempt = 0;
@@ -623,6 +695,7 @@ function restoreFromBackup() {
       const d = JSON.parse(raw);
       if (Array.isArray(d.transactions)) transactions = d.transactions;
       if (Array.isArray(d.orders)) orders = d.orders;
+      if (Array.isArray(d.dailyRecords)) dailyRecords = d.dailyRecords;
       if (Array.isArray(d.pools) && d.pools.length) pools = d.pools;
       if (Array.isArray(d.categories) && d.categories.length) categories = d.categories;
       refreshCurrentSection();
@@ -652,7 +725,7 @@ window.addEventListener('beforeunload', backupLocally);
 // ══════════════════════════════════════════
 function setUser(name) {
   currentUser = name;
-  localStorage.setItem('bp_user', name);
+  localStorage.setItem('pv_user', name);
   document.getElementById('loggedInAs').textContent = name==='Husband' ? 'Husband' : '♾️ Wife';
   document.getElementById('userPillName').textContent = name==='Husband' ? 'Husband' : '♾️ Wife';
   closeModal('userModal');
@@ -676,6 +749,7 @@ function goTo(name) {
   if(name==='add') renderAddForm();
   if(name==='history') renderHistory();
   if(name==='setup') renderSetup();
+  if(name==='daily') renderDaily();
 }
 function refreshCurrentSection() {
   if(currentSection==='home') renderHome();
@@ -765,7 +839,7 @@ function renderHome() {
 // ORDERS
 // ══════════════════════════════════════════
 function renderOrders() {
-  const filters = ['All', ...STATUS_ORDER.map(s=>SC[s].label)];
+  const filters = ['All', 'Website', 'Instagram', ...STATUS_ORDER.map(s=>SC[s].label)];
   document.getElementById('orderFilters').innerHTML = filters.map(f=>{
     const active = f===orderFilter ? 'active' : '';
     const escaped = f.replace(/"/g,'&quot;');
@@ -773,7 +847,9 @@ function renderOrders() {
   }).join('');;
 
   let filtered = [...orders].sort((a,b)=>new Date(b.date)-new Date(a.date));
-  if(orderFilter!=='All') {
+  if(orderFilter==='Website') { filtered = filtered.filter(o=>!o.source||o.source==='website'); }
+  else if(orderFilter==='Instagram') { filtered = filtered.filter(o=>o.source==='instagram'); }
+  else if(orderFilter!=='All') {
     const key = Object.keys(SC).find(k=>SC[k].label===orderFilter);
     if(key) filtered = filtered.filter(o=>o.status===key);
   }
@@ -855,6 +931,7 @@ function renderOrders() {
     statusRow.innerHTML =
       '<span class="status-pill '+sc.cls+'">'+sc.label+'</span>' +
       '<span class="pay-type-pill '+(o.payType==='cod'?'pt-cod':'pt-prepaid')+'">'+(o.payType==='cod'?'COD':'Prepaid')+'</span>' +
+      '<span class="src-pill '+(o.source==='instagram'?'src-insta':'src-web')+'">'+(o.source==='instagram'?'📸 Instagram':'🌐 Website')+'</span>' +
       (o.fromForm?'<span style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;">Form</span>':'')+
       '<span class="order-meta">by '+(o.by||'—')+'</span>';
     card.appendChild(statusRow);
@@ -947,6 +1024,8 @@ function openNewOrderModal() {
   setPayType('cod');
   document.querySelectorAll('#statusGrid .status-opt').forEach(b=>b.classList.remove('selected'));
   document.querySelector('#statusGrid .s-ordered')?.classList.add('selected');
+  selectedOrderSource='website';
+  setOrderSource('website');
   document.getElementById('newOrderModal').classList.add('open');
 }
 
@@ -967,7 +1046,9 @@ function editOrder(id) {
   document.getElementById('oNote').value = o.note||'';
   selectedStatus = o.status;
   selectedPayType = o.payType||'cod';
+  selectedOrderSource = o.source||'website';
   setPayType(selectedPayType);
+  setOrderSource(selectedOrderSource);
   document.querySelectorAll('#statusGrid .status-opt').forEach(b=>b.classList.remove('selected'));
   document.querySelector(`#statusGrid .s-${o.status}`)?.classList.add('selected');
   document.getElementById('newOrderModal').classList.add('open');
@@ -1200,7 +1281,8 @@ function renderHistory(){
   else if(activeFilter!=='All'){const pool=pools.find(p=>p.name===activeFilter);if(pool)filtered=transactions.filter(t=>t.pool===pool.id||t.toPool===pool.id);}
   document.getElementById('historyTitle').textContent=`${activeFilter} (${filtered.length})`;
   if(!filtered.length){document.getElementById('historyList').innerHTML='<div class="empty"><div class="empty-icon">📭</div>No transactions yet</div>';return;}
-  document.getElementById('historyList').innerHTML=filtered.map(tx=>{
+  const histEl = document.getElementById('historyList');
+  histEl.innerHTML=filtered.map(tx=>{
     const pool=pools.find(p=>p.id===tx.pool)||{icon:'?',color:'#888',name:'?'};
     const cat=categories.find(c=>c.id===tx.cat)||{name:tx.type==='transfer'?'Transfer':'?'};
     const d=new Date(tx.date);
@@ -1216,11 +1298,34 @@ function renderHistory(){
         ${tx.by?`<div class="tx-by" style="color:${byColor}">by ${tx.by}</div>`:''}
         </div>
       </div>
-      <div class="tx-amount ${amtClass}">${sign}${fmt(tx.amount)}</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="tx-amount ${amtClass}">${sign}${fmt(tx.amount)}</div>
+        <button class="del-tx-btn" data-tid="${tx.id}">✕</button>
+      </div>
     </div>`;
   }).join('');
+  // Attach delete listeners
+  histEl.querySelectorAll('.del-tx-btn[data-tid]').forEach(btn => {
+    btn.addEventListener('click', function(){ deleteTransaction(this.dataset.tid); });
+  });
 }
 function setFilter(f){activeFilter=f;renderHistory();}
+
+async function deleteTransaction(id) {
+  if(!confirm('Delete this transaction?')) return;
+  transactions = transactions.filter(t=>t.id!==id);
+  await saveToCloud();
+  renderHistory();
+  showToast('🗑 Transaction deleted');
+}
+
+async function deleteTransaction(id) {
+  if(!confirm('Delete this transaction?')) return;
+  transactions = transactions.filter(t=>t.id!==id);
+  await saveToCloud();
+  renderHistory();
+  showToast('🗑 Transaction deleted');
+}
 
 // SETUP
 function renderSetup(){
@@ -1256,6 +1361,125 @@ function showToast(msg){
   const t=document.createElement('div');t.className='toast';t.textContent=msg;
   document.body.appendChild(t);
   setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(()=>t.remove(),300);},2500);
+}
+
+// ══════════════════════════════════════════
+// DAILY RECORDS
+// ══════════════════════════════════════════
+let dailyRecords = [];
+
+function openDailyModal() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('dailyDate').value = today;
+  document.getElementById('dailyOpening').value = '';
+  document.getElementById('dailySpent').value = '';
+  document.getElementById('dailyReceived').value = '';
+  document.getElementById('dailyNote').value = '';
+  document.getElementById('closingPreview').textContent = '₹0';
+  document.getElementById('dailyModal').classList.add('open');
+  ['dailyOpening','dailySpent','dailyReceived'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateClosingPreview);
+  });
+}
+
+function updateClosingPreview() {
+  const opening = parseFloat(document.getElementById('dailyOpening').value)||0;
+  const spent   = parseFloat(document.getElementById('dailySpent').value)||0;
+  const received= parseFloat(document.getElementById('dailyReceived').value)||0;
+  const closing = opening + received - spent;
+  document.getElementById('closingPreview').textContent = fmt(closing);
+  document.getElementById('closingPreview').style.color = closing >= 0 ? '#000' : '#dc2626';
+}
+
+async function saveDailyRecord() {
+  const date = document.getElementById('dailyDate').value;
+  if(!date) { showToast('⚠️ Select a date'); return; }
+  const opening  = parseFloat(document.getElementById('dailyOpening').value)||0;
+  const spent    = parseFloat(document.getElementById('dailySpent').value)||0;
+  const received = parseFloat(document.getElementById('dailyReceived').value)||0;
+  const closing  = opening + received - spent;
+  const record = {
+    id: Date.now().toString(),
+    date, opening, spent, received, closing,
+    note: document.getElementById('dailyNote').value.trim(),
+    by: currentUser,
+    createdAt: new Date().toISOString()
+  };
+  dailyRecords.unshift(record);
+  closeModal('dailyModal');
+  showToast('✅ Daily record saved!');
+  await saveToCloud();
+  renderDaily();
+}
+
+function renderDaily() {
+  const sorted = [...dailyRecords].sort((a,b) => new Date(b.date) - new Date(a.date));
+  // Monthly summary
+  const now = new Date();
+  const thisMonth = sorted.filter(r => {
+    const d = new Date(r.date);
+    return d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
+  });
+  const totalSpent    = thisMonth.reduce((s,r)=>s+r.spent,0);
+  const totalReceived = thisMonth.reduce((s,r)=>s+r.received,0);
+  document.getElementById('dailySummary').innerHTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
+    '<div class="kpi-box" style="--kc:var(--green)"><div class="kpi-label">Received</div><div class="kpi-value">'+fmt(totalReceived)+'</div><div class="kpi-sub">This month</div></div>' +
+    '<div class="kpi-box" style="--kc:var(--red)"><div class="kpi-label">Spent</div><div class="kpi-value">'+fmt(totalSpent)+'</div><div class="kpi-sub">This month</div></div>' +
+    '<div class="kpi-box" style="--kc:#000"><div class="kpi-label">Net</div><div class="kpi-value" style="color:'+(totalReceived-totalSpent>=0?'#16a34a':'#dc2626')+'">'+fmt(totalReceived-totalSpent)+'</div><div class="kpi-sub">This month</div></div>' +
+    '<div class="kpi-box" style="--kc:#888"><div class="kpi-label">Days Logged</div><div class="kpi-value">'+thisMonth.length+'</div><div class="kpi-sub">This month</div></div>' +
+    '</div>';
+
+  if(!sorted.length) {
+    document.getElementById('dailyList').innerHTML = '<div class="empty"><div class="empty-icon">📅</div>No daily records yet</div>';
+    return;
+  }
+  const list = document.getElementById('dailyList');
+  list.innerHTML = '';
+  sorted.forEach(r => {
+    const d = new Date(r.date);
+    const ds = d.toLocaleDateString('en-IN',{weekday:'short',day:'2-digit',month:'short',year:'numeric'});
+    const card = document.createElement('div');
+    card.className = 'daily-card';
+    card.innerHTML =
+      '<div class="daily-left">' +
+        '<div class="daily-date">'+ds+'</div>' +
+        '<div class="daily-row">' +
+          '<div class="daily-stat">Open: <span>'+fmt(r.opening)+'</span></div>' +
+          '<div class="daily-stat" style="color:#16a34a">In: <span>'+fmt(r.received)+'</span></div>' +
+          '<div class="daily-stat" style="color:#dc2626">Out: <span>'+fmt(r.spent)+'</span></div>' +
+        '</div>' +
+        (r.note?'<div class="daily-note">'+r.note+'</div>':'') +
+      '</div>' +
+      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">' +
+        '<div class="daily-closing"><div class="daily-closing-val" style="color:'+(r.closing>=0?'#000':'#dc2626')+'">'+fmt(r.closing)+'</div><div class="daily-closing-label">closing</div></div>' +
+        '<button class="del-btn" data-rid="'+r.id+'">✕ Delete</button>' +
+      '</div>';
+    list.appendChild(card);
+  });
+  // Attach delete listeners safely
+  list.querySelectorAll('.del-btn[data-rid]').forEach(btn => {
+    btn.addEventListener('click', function(){ deleteDailyRecord(this.dataset.rid); });
+  });
+}
+
+async function deleteDailyRecord(id) {
+  if(!confirm('Delete this daily record?')) return;
+  dailyRecords = dailyRecords.filter(r=>r.id!==id);
+  await saveToCloud();
+  renderDaily();
+  showToast('🗑 Record deleted');
+}
+
+// ══════════════════════════════════════════
+// ORDER SOURCE
+// ══════════════════════════════════════════
+let selectedOrderSource = 'website';
+
+function setOrderSource(src) {
+  selectedOrderSource = src;
+  document.getElementById('srcBtnWeb').classList.toggle('active', src==='website');
+  document.getElementById('srcBtnInsta').classList.toggle('active', src==='instagram');
 }
 
 // ══════════════════════════════════════════
